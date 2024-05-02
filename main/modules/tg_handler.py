@@ -94,6 +94,7 @@ def get_audio_language(video_path):
             if track.track_type == 'Audio':
                 language = track.language
                 language = language.replace("ja", "JP")
+                language = language.replace("en", "EN")
                 return language
         return None
     except Exception as e:
@@ -107,10 +108,6 @@ async def start_uploading(data):
 
         title = data["title"]
         dbtit = data["title"]
-        title = title.replace("Dr. Stone - New World", "Dr Stone New World")
-        title = title.replace("Opus.COLORs", "Opus COLORs")
-        title = title.replace(" Isekai wa Smartphone to Tomo ni. 2", " Isekai wa Smartphone to Tomo ni 2")
-        title = title.replace("Stand My Heroes - Warmth of Memories - OVA", "Stand My Heroes Warmth of Memories - OVA")
         link = data["link"]
         size = data["size"]
         nyaasize = data["size"]
@@ -139,28 +136,15 @@ async def start_uploading(data):
         duration = get_duration(file)
         durationx = get_durationx(file)
         filed = os.path.basename(file)
-        filed = filed.replace(filed[-14:], ".mkv")
-        filed = filed.replace("[Erai-raws]", "[AniDL]")
-        filed = filed.replace("[1080p][Multiple Subtitle]", "[1080p Web-DL]")
-        filed = filed.replace("[1080p]", "[1080p Web-DL]")
-        filed = filed.replace("2nd Season", "S2")
-        filed = filed.replace("3rd Season", "S3")
-        razo = filed.replace("[1080p Web-DL]", "[720p x265] @animxt")
+        filed = filed.replace(filed, title)
         fpath = "downloads/" + filed
         ghostname = name
-        ghostname = ghostname.replace("[1080p][Multiple Subtitle]", "")
-        ghostname = ghostname.replace("[1080p]", "")
-        ghostname = ghostname.replace("2nd Season", "S2")
-        ghostname = ghostname.replace("3rd Season", "S3")
         subtitle = subtitle.replace("][", ", ")
         subtitle = subtitle.replace("[", "")
         subtitle = subtitle.replace("]", "")     
     
         os.rename(file,"video.mkv")
-        titlx = title.replace('[1080p][Multiple Subtitle]', '[Web][720p x265 10Bit][Opus][Erai-raws]')
-        titm = f"**[AniDL] {titlx}**"
-        tito = f"[AniDL] {titlx}"
-        main = await app.send_photo(KAYO_ID,photo=img, caption=titm)
+        main = await app.send_photo(KAYO_ID,photo=img, caption=title)
         video_path="video.mkv"
         
         audio_language = get_audio_language(video_path)
