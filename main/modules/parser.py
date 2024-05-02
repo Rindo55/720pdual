@@ -9,17 +9,18 @@ from main import queue
 from main.inline import button1
 
 def trim_title(title: str):
-    title = title.rsplit(' ', 1)[0]
-    title = title.replace("[Erai-raws] ", "")
-    title = title.replace("Dr. Stone - New World Cour 2", "Dr Stone New World Part 2")
-    title = title.replace("Mahou Tsukai no Yome Season 2 Cour 2", "Mahou Tsukai no Yome Season 2 Part 2")
-    title = title.replace("Dead Mount Death Play 2nd Cour", "Dead Mount Death Play Part 2")
-    title = title.replace(" (CA)", "")
-    title = title.replace(" (JA)", "")
-    title = title.replace("Tian Guan Ci Fu Di Er Ji", "Heaven Official's Blessing S2")
-    title = title.replace("(AAC 2.0) ", "")
-    ext = ".mkv"
-    title = title + ext
+    pattern = r"^(.*?)\s*(S\d+E\d+)\s*(.*?)\s\d{3,4}p\s(.*?)\sWEB-DL.*?\((.*?),.*?\)$"
+    match = re.match(pattern, title)
+    if match:
+        titler, episode, extra, source, at = match.groups()
+        if at=="Dual-Audio":
+            title = f"[AniDL] {titler.strip()} - {episode.strip()} [Web ~ {source.strip()}][720p x265 10Bit][Dual-Audio ~ Opus].mkv"
+        else:
+            if source=="HIDI":
+                source = source.replace("HIDI","HIDIVE")
+                title = f"[AniDL] {at.strip()} - {episode.strip()} [Web ~ {source.strip()}][720p x265 10Bit][Dual-Audio ~ Opus].mkv"
+            else:
+                title = f"[AniDL] {at.strip()} - {episode.strip()} [Web ~ {source.strip()}][720p x265 10Bit][Dual-Audio ~ Opus].mkv"
     return title
 
 def multi_sub(title: str):
@@ -27,14 +28,13 @@ def multi_sub(title: str):
     return subtitle
 
 def parse():
-    a = feedparser.parse("https://siftrss.com/f/oyebWJBqN8")
+    a = feedparser.parse("https://nyaa.si/?page=rss&q=dual&c=0_0&f=0&u=varyg1001")
     b = a["entries"]
     data = []    
 
     for i in b:
         item = {}
         item['title'] = trim_title(i['title'])
-        item['subtitle'] = multi_sub(i['title'])
         item['size'] = i['nyaa_size']   
         item['link'] = "magnet:?xt=urn:btih:" + i['nyaa_infohash']
         data.append(item)
