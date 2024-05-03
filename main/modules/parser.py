@@ -1,3 +1,4 @@
+import re
 import asyncio
 from main.modules.schedule import update_schedule
 from main.modules.usschedule import update_schedulex
