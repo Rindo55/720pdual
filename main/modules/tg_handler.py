@@ -216,7 +216,7 @@ async def start_uploading(data):
         subtitle = exsub
         msubtitle = replace_text_with_mapping(subtitle, mapping)
         print(msubtitle)
-        compressed = await compress_video(duration,main,tito)
+        compressed = await compress_video(duration,main,title)
     
 
         if compressed == "None" or compressed == None:
