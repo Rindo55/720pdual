@@ -42,9 +42,16 @@ from pyrogram.errors import FloodWait
 
 from main.inline import button1
 
+def extract_source(filename):
+    pattern = r"\[Web ~ (.*?)\]"
+    match = re.search(pattern, filename)
+    if match:
+        source = match.group(1)
+        return source
+    else:
+        return None  
 
-
-async def upload_video(msg: Message, img, file, id, tit, name, ttl, main, subtitle, nyaasize, audio_info, alink):
+async def upload_video(msg: Message, img, file, id, tit, name, ttl, main, subtitle, nyaasize, audio_info, alink, filed):
     try:
         fuk = isfile(file)
         if fuk:
@@ -53,15 +60,18 @@ async def upload_video(msg: Message, img, file, id, tit, name, ttl, main, subtit
             duration = get_duration(file)
             durationx = get_durationx(file)
             size = get_filesize(file)
-            ep_num = get_epnum(name)
+            ep_num = get_epnum(title)
+            source = extract_source(filed)
             print(ep_num)
             rest = tit
             filed = os.path.basename(file)
             print('filed: ', filed)
             anidltitle = filed.replace("[AniDL] ", "")
-            anidltitle = anidltitle.replace("[1080p Web-DL].mkv", "")
+            anidltitle = anidltitle.replace(" [Web ~ AMZN][720p x265 10Bit][Dual-Audio ~ Opus].mkv", "")
+            anidltitle = anidltitle.replace(" [Web ~ CR][720p x265 10Bit][Dual-Audio ~ Opus].mkv", "")
+            anidltitle = anidltitle.replace(" [Web ~ HIDIVE][720p x265 10Bit][Dual-Audio ~ Opus].mkv", "")
+            anidltitle = anidltitle.replace(" [Web ~ DSNP][720p x265 10Bit][Dual-Audio ~ Opus].mkv", "")
             
-            filed = filed.replace("[1080p Web-DL]", "[Web][720p x265 10Bit][Opus][Erai-raws]")
             fukpath = "downloads/" + filed
             caption = f"{filed}"
 
@@ -100,7 +110,7 @@ async def upload_video(msg: Message, img, file, id, tit, name, ttl, main, subtit
             )
             await asyncio.sleep(3)
             anidl_id=-1001234112068
-            anidlcap = f"<b>{anidltitle}</b>\n<i>({tit})</i>\n\n<blockquote><b>• Source:</b> <code>Erai-raws</code>\n<b>• Video:</b> <code>720p x265 10Bit CRF@22</code>\n<b>• Audio:</b> <code>Japanese (OPUS)</code>\n<b>• Subtitle:</b> <code>{subtitle}</code></blockquote>"
+            anidlcap = f"<b>{anidltitle}</b>\n<i>({tit})</i>\n\n<blockquote><b>• Source:</b> <code>{source}</code>\n<b>• Video:</b> <code>720p x265 10Bit CRF@23</code>\n<b>• Audio:</b> <code>Japanese & English (OPUS)</code>\n<b>• Subtitle:</b> <code>{subtitle}</code></blockquote>"
             anidl_markup = InlineKeyboardMarkup(
                 [
                     [
