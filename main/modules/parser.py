@@ -19,7 +19,7 @@ def trim_title(title: str):
                 source = source.replace("HIDI", "HIDIVE")
                 title = f"[AniDL] {titler.strip()} - {episode.strip()} [Web ~ {source.strip()}][720p x265 10Bit][Dual-Audio ~ Opus].mkv"
             else:
-                title = f"[AniDL] {at.strip()} - {episode.strip()} [Web ~ {source.strip()}][720p x265 10Bit][Dual-Audio ~ Opus].mkv"
+                title = f"[AniDL] {titler.strip()} - {episode.strip()} [Web ~ {source.strip()}][720p x265 10Bit][Dual-Audio ~ Opus].mkv"
         else:
             title = f"[AniDL] {at.strip()} - {episode.strip()} [Web ~ {source.strip()}][720p x265 10Bit][Dual-Audio ~ Opus].mkv"
     return title
