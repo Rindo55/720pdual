@@ -98,8 +98,8 @@ def get_filesize(file):
 
     return x
 
-def get_epnum(name):
-    x = name.split(" - ")[-1].strip()
+def get_epnum(title):
+    x = title.split(" - ")[-1].strip()
     x = x.split(" ")[0]
     x = x.strip()
     return x
