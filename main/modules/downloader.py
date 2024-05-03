@@ -9,7 +9,7 @@ from main.modules.progress import *
 from main.modules.utils import get_progress_text
 
 
-async def downloader(message: Message, link: str,total,name):
+async def downloader(message: Message, link: str,total,title):
   params = {
   'save_path': 'downloads/',
   'storage_mode': lt.storage_mode_t(2),}
@@ -23,7 +23,7 @@ async def downloader(message: Message, link: str,total,name):
   while (not handle.has_metadata()):    
     await asyncio.sleep(1)
 
-  await r.edit(f'Got Metadata, Starting Download Of **{str(name)}**...')
+  await r.edit(f'Got Metadata, Starting Download Of **{str(title)}**...')
 
   trgt = str(handle.name())
 
