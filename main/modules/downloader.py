@@ -34,7 +34,7 @@ async def downloader(message: Message, link: str,total,title):
     state_str = ['queued', 'checking', 'downloading metadata', 'downloading', 'finished', 'seeding', 'allocating']
     
     texty = get_progress_text(
-        name, 
+        title, 
         str(state_str[s.state]).capitalize(), 
         s.progress,
         s.download_rate,
