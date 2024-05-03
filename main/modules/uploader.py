@@ -71,6 +71,7 @@ async def upload_video(msg: Message, img, file, id, tit, name, ttl, main, subtit
             anidltitle = anidltitle.replace(" [Web ~ CR][720p x265 10Bit][Dual-Audio ~ Opus].mkv", "")
             anidltitle = anidltitle.replace(" [Web ~ HIDIVE][720p x265 10Bit][Dual-Audio ~ Opus].mkv", "")
             anidltitle = anidltitle.replace(" [Web ~ DSNP][720p x265 10Bit][Dual-Audio ~ Opus].mkv", "")
+            anidltitle = anidltitle.replace(" [Web ~ HMAX][720p x265 10Bit][Dual-Audio ~ Opus].mkv", "")
             
             fukpath = "downloads/" + filed
             caption = f"{filed}"
