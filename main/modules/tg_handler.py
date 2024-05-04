@@ -188,7 +188,7 @@ async def start_uploading(data):
         duration = get_duration(file)
         durationx = get_durationx(file)
         fileqd = os.path.basename(file)
-        filed = fileqd.replace(filed, title)
+        filed = fileqd.replace(fileqd, title)
         fpath = "downloads/" + filed
         ghostname = title
         
