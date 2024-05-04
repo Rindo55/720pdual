@@ -59,10 +59,9 @@ async def upload_video(msg: Message, img, file, id, tit, ttl, main, subtitle, ny
             print(filed)
             r = msg
             c_time = time.time()
-            duration = get_duration(file)
-            durationx = get_durationx(file)
+            
             size = get_filesize(file)
-            ep_num = get_epnum(title)
+            ep_num = get_epnum(filed)
             source = extract_source(filed)
             print(ep_num)
             rest = tit
