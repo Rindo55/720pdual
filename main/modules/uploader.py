@@ -51,10 +51,11 @@ def extract_source(filename):
     else:
         return None  
 
-async def upload_video(msg: Message, img, file, id, tit, ttl, main, subtitle, nyaasize, audio_info, alink, filed):
+async def upload_video(msg: Message, img, file, id, tit, ttl, main, subtitle, nyaasize, audio_info, alink):
     try:
         fuk = isfile(file)
         if fuk:
+            filed=os.path.basename(file)
             print(filed)
             r = msg
             c_time = time.time()
