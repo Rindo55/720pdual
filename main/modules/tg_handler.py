@@ -87,20 +87,18 @@ async def tg_handler():
             pass
 
 
-def get_audio_language(video_path):
+def get_audio_languages(video_path):
     try:
         media_info = MediaInfo.parse(video_path)
+        audio_tracks = []
         for track in media_info.tracks:
             if track.track_type == 'Audio':
-                language = track.language
-                language = language.replace("ja", "JP")
-                language = language.replace("en", "EN")
-                return language
-        return None
+                audio_tracks.append(track.language)
+        return audio_tracks
     except Exception as e:
         print(f"Error: {e}")
         return None
-        
+
 def esl(video_path):
     media_info = MediaInfo.parse(video_path)
     
@@ -199,8 +197,9 @@ async def start_uploading(data):
         video_path="video.mkv"
         
         audio_language = get_audio_language(video_path)
-        if audio_language:
-            print("Audio Track Language:", audio_language)
+        joinaud = ", ".join(audio_languages)
+        if joinaud:
+            print("Audio Track Language:", joinaud)
         else:
             print("Failed to get audio language.")
         subtitle_languages = esl(video_path)
@@ -230,7 +229,7 @@ async def start_uploading(data):
             os.rename("out.mkv",fpath)
   
         print("Uploading --> ",title)
-        video = await upload_video(msg,img,fpath,id,tit,name,size,main,msubtitle,nyaasize,audio_language, alink, filed)
+        video = await upload_video(msg,img,fpath,id,tit,name,size,main,msubtitle,nyaasize,joinaud, alink, filed)
 
 
 
