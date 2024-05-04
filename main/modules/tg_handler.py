@@ -197,7 +197,7 @@ async def start_uploading(data):
         video_path="video.mkv"
         
         audio_language = get_audio_languages(video_path)
-        joinaud = ", ".join(audio_languages)
+        joinaud = ", ".join(audio_language)
         if joinaud:
             print("Audio Track Language:", joinaud)
         else:
