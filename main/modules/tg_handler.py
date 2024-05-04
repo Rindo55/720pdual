@@ -196,7 +196,7 @@ async def start_uploading(data):
         main = await app.send_photo(KAYO_ID,photo=img, caption=title)
         video_path="video.mkv"
         
-        audio_language = get_audio_language(video_path)
+        audio_language = get_audio_languages(video_path)
         joinaud = ", ".join(audio_languages)
         if joinaud:
             print("Audio Track Language:", joinaud)
