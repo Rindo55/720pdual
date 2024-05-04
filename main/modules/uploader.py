@@ -51,10 +51,11 @@ def extract_source(filename):
     else:
         return None  
 
-async def upload_video(msg: Message, img, file, id, tit, name, ttl, main, subtitle, nyaasize, audio_info, alink, filed):
+async def upload_video(msg: Message, img, file, id, tit, ttl, main, subtitle, nyaasize, audio_info, alink, filed):
     try:
         fuk = isfile(file)
         if fuk:
+            print(filed)
             r = msg
             c_time = time.time()
             duration = get_duration(file)
@@ -64,8 +65,8 @@ async def upload_video(msg: Message, img, file, id, tit, name, ttl, main, subtit
             source = extract_source(filed)
             print(ep_num)
             rest = tit
-            filed = os.path.basename(file)
-            print('filed: ', filed)
+            
+            
             anidltitle = filed.replace("[AniDL] ", "")
             anidltitle = anidltitle.replace(" [Web ~ AMZN][720p x265 10Bit][Dual-Audio ~ Opus].mkv", "")
             anidltitle = anidltitle.replace(" [Web ~ CR][720p x265 10Bit][Dual-Audio ~ Opus].mkv", "")
