@@ -14,12 +14,13 @@ def trim_title(title: str):
     match = re.match(pattern, title)
     if match:
         titler, episode, extra, source, at = match.groups()
+        titler = titler.replace("Re:Monster", "Re-Monster")
         if at=="Dual-Audio":
             if source=="HIDI":
                 source = source.replace("HIDI", "HIDIVE")
                 title = f"[AniDL] {titler.strip()} - {episode.strip()} [Web ~ {source.strip()}][720p x265 10Bit][Dual-Audio ~ Opus].mkv"
             else:
-                title = f"[AniDL] {titler.strip()} - {episode.strip()} [Web ~ {source.strip()}][720p x265 10Bit][Dual-Audio ~ Opus].mkv"
+       "         title = f"[AniDL] {titler.strip()} - {episode.strip()} [Web ~ {source.strip()}][720p x265 10Bit][Dual-Audio ~ Opus].mkv"
         else:
             if source=="HIDI":
                 source = source.replace("HIDI", "HIDIVE")
